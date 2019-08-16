@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Golf.Models;
+using Golf.ModelsActual;
 
 namespace Golf.Interfaces
 {
     public interface IApp
     {
-        //NOTE don't forget to create a Course model and then within this file declare `using Golf.Models`
+        //NOTE don't forget to create a Course model and then within this file declare `using Golf.ModelsActual`
         Course ActiveCourse { get; set; }
         List<Player> Players { get; set; }
         List<Course> Courses { get; set; }

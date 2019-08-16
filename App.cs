@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Golf.Interfaces;
-using Golf.Models;
+using Golf.ModelsActual;
 
 namespace Golf
 {
@@ -28,6 +28,16 @@ namespace Golf
             course1.Holes.Add(hole4);
             course1.Holes.Add(hole6);
 
+            course2.Holes.Add(hole5);
+            course2.Holes.Add(hole3);
+            course2.Holes.Add(hole4);
+            course2.Holes.Add(hole6);
+
+            course3.Holes.Add(hole5);
+            course3.Holes.Add(hole3);
+            course3.Holes.Add(hole4);
+            course3.Holes.Add(hole6);
+
             Courses.Add(course1);
             Courses.Add(course2);
             Courses.Add(course3);
@@ -39,7 +49,7 @@ namespace Golf
 
         public void DisplayCourses()
         {
-            Console.WriteLine("MARIO Golf!");
+            Console.WriteLine("MARIO GOLF!");
             Console.WriteLine("================================================");
 
             int count = 1;
@@ -51,26 +61,62 @@ namespace Golf
             Console.WriteLine("------------------------------------------------");
 
             SelectCourse();
-            SetPlayers();
         }
 
         public void SelectCourse()
         {
-            // Console.WriteLine("Choose a course:");
-            // string courseChoice = Console.ReadLine();
-            // switch (courseChoice)
-            // {
-            //     case "1":
+            Console.Write("Choose a course: ");
+            string courseChoice = Console.ReadLine();
+            switch (courseChoice)
+            {
+                case "1":
+                    ActiveCourse = Courses[0];
+                    break;
+                case "2":
+                    ActiveCourse = Courses[1];
+                    break;
+                case "3":
+                    ActiveCourse = Courses[2];
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Try again!");
+                    SelectCourse();
+                    break;
+            }
 
-            //     default:
-            // }
+            SetPlayers();
         }
 
         public void SetPlayers()
         {
+            Console.Write("Number of Players: ");
+            int numberOfPlayers = Convert.ToInt32(Console.ReadLine());
+            while (numberOfPlayers > 0)
+            {
+                numberOfPlayers--;
+                Console.Write("Player Name: ");
+                string playerName = Console.ReadLine();
 
-            Console.WriteLine("Number of Players:");
+                // NOTE Still need to figure out how to handle Player
+                Player player = new Player(playerName);
+            }
 
+            PlayHoles(player);
+        }
+
+        public void PlayHoles(string player)
+        {
+            for (var i = 1; i < ActiveCourse.Holes.Count; i++)
+            {
+                Console.Clear();
+                Console.WriteLine(ActiveCourse.Name);
+                // NOTE Not showing Par number
+                Console.WriteLine($"Hole: {i} Par: {ActiveCourse.Holes}");
+                Console.WriteLine("------------------------------------------------");
+                Player.ScoreCount(player);
+            }
+
+            DisplayPlayerResults();
         }
 
         public void Run()
@@ -83,11 +129,20 @@ namespace Golf
 
         public void DisplayPlayerResults()
         {
+            Console.WriteLine(ActiveCourse.Name);
+            Console.WriteLine("Total Player Scores");
+            Console.WriteLine("------------------------------------------------");
 
+            for (var i = 0; i < Players.Count; i++)
+            {
+                // NOTE Display player name and score
+                // Console.WriteLine(Player.);
+            }
         }
 
         public App()
         {
+            InChoosingCourses = true;
             Players = new List<Player>();
             Courses = new List<Course>();
         }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Golf.Interfaces;
 
-namespace Golf.Models
+namespace Golf.ModelsActual
 {
     public class Course : ICourse
     {

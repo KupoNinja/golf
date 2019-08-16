@@ -1,6 +1,6 @@
 using Golf.Interfaces;
 
-namespace Golf.Models
+namespace Golf.ModelsActual
 {
     public class Hole : IHole
     {

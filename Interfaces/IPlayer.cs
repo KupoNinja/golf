@@ -7,6 +7,6 @@ namespace Golf.Interfaces
         string Name { get; set; }
         List<int> Scores { get; set; }
 
-        void DisplayFinalScore(); //NOTE responsible for summing up all of the scores in the player's Scores property and displaying the result to the user
+        int ScoreCount(string playerName); //NOTE responsible for summing up all of the scores in the player's Scores property and displaying the result to the user
     }
 }
