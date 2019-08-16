@@ -6,7 +6,10 @@ namespace Golf
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.Clear();
+            App app = new App();
+            app.Setup();
+            app.Run();
         }
     }
 }

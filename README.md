@@ -6,7 +6,7 @@
 <hr>
 In this project students will demonstrate the ability to work with classes, create lists, and manage validation of user inputs. 
 
-The goal of this application is to track golf scores for a number of users over a predefined course. At the end scores are totaled and a winner is declared
+The goal of this application is to track Golf scores for a number of users over a predefined course. At the end scores are totaled and a winner is declared
 
 ## The Setup
 <hr>
