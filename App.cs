@@ -65,7 +65,7 @@ namespace Golf
 
         public void SelectCourse()
         {
-            Console.Write("Choose a course: ");
+            Console.Write("Choose a Course: ");
             string courseChoice = Console.ReadLine();
             switch (courseChoice)
             {
@@ -93,27 +93,32 @@ namespace Golf
             int numberOfPlayers = Convert.ToInt32(Console.ReadLine());
             while (numberOfPlayers > 0)
             {
+
                 numberOfPlayers--;
                 Console.Write("Player Name: ");
                 string playerName = Console.ReadLine();
 
                 // NOTE Still need to figure out how to handle Player
                 Player player = new Player(playerName);
+                Players.Add(player);
             }
 
-            PlayHoles(player);
+            PlayHoles(Players);
         }
 
-        public void PlayHoles(string player)
+        public void PlayHoles(List<Player> Players)
         {
-            for (var i = 1; i < ActiveCourse.Holes.Count; i++)
+            Console.Clear();
+            Console.WriteLine(ActiveCourse.Name);
+            // NOTE Not showing Par number
+
+            for (var i = 0; i < ActiveCourse.Holes.Count; i++)
             {
-                Console.Clear();
-                Console.WriteLine(ActiveCourse.Name);
-                // NOTE Not showing Par number
                 Console.WriteLine($"Hole: {i} Par: {ActiveCourse.Holes}");
                 Console.WriteLine("------------------------------------------------");
-                Player.ScoreCount(player);
+                Console.Write($"Strokes for {Players[i].Name}: ");
+                int numberOfStrokes = Convert.ToInt32(Console.ReadLine());
+                // Player[i].ScoreCount(numberOfStrokes);
             }
 
             DisplayPlayerResults();
@@ -135,7 +140,7 @@ namespace Golf
 
             for (var i = 0; i < Players.Count; i++)
             {
-                // NOTE Display player name and score
+                // NOTE Display player name and score total use Player.ScoreCount();
                 // Console.WriteLine(Player.);
             }
         }
