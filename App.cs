@@ -127,12 +127,20 @@ namespace Golf
         {
             Console.Clear();
             Console.WriteLine(ActiveCourse.Name);
-            // NOTE Not showing Par number
+            Console.WriteLine("================================================");
 
-            for (var i = 0; i < ActiveCourse.Holes.Count; i++)
+            // NOTE Keep active hole number displayed while each player enters number of strokes
+            // Go through each player. Once all players have entered score move to the next hole.
+            // Use Player.ScoreCount()?
+
+            int holeCount = 1;
+            // Take this out later
+            Console.WriteLine(ActiveCourse.Holes.Count);
+            // NOTE Not showing Par number
+            Console.WriteLine($"Hole: {holeCount} Par: {ActiveCourse.Holes}");
+            Console.WriteLine("------------------------------------------------");
+            for (var i = 0; i <= ActiveCourse.Holes.Count; i++)
             {
-                Console.WriteLine($"Hole: {i} Par: {ActiveCourse.Holes}");
-                Console.WriteLine("------------------------------------------------");
                 Console.Write($"Strokes for {Players[i].Name}: ");
                 int numberOfStrokes = Convert.ToInt32(Console.ReadLine());
                 // Player[i].ScoreCount(numberOfStrokes);
