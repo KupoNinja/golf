@@ -10,21 +10,9 @@ namespace Golf.ModelsActual
         public string Name { get; set; }
         public List<int> Scores { get; set; }
 
-        public int ScoreCount(int numberOfStrokes)
+        public void DisplayFinalScore()
         {
-            Scores.Add(numberOfStrokes);
-
-            // for (var i = 0; i < Players.Count; i++)
-            // {
-            //     Console.Write("Strokes for " + Players.Count.);
-            //     int playerScore = Convert.ToInt32(Console.ReadLine());
-
-            //     Scores.Add(playerScore);
-            // }
-
-            // NOTE Add each individual player score and total here?
-
-            return numberOfStrokes;
+            Scores.Sum();
         }
 
         public Player(string name)

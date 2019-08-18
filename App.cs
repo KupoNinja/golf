@@ -10,7 +10,7 @@ namespace Golf
         public Course ActiveCourse { get; set; }
         public List<Player> Players { get; set; }
         public List<Course> Courses { get; set; }
-        public bool InChoosingCourses { get; set; }
+        // public bool InChoosingCourses { get; set; }
 
         public void Setup()
         {
@@ -111,7 +111,6 @@ namespace Golf
                         Console.Write("Player Name: ");
                         string playerName = Console.ReadLine();
 
-                        // NOTE Still need to figure out how to handle Player
                         Player player = new Player(playerName);
                         Players.Add(player);
                     }
@@ -120,41 +119,44 @@ namespace Golf
                 }
             }
 
-            PlayHoles(Players);
+            // PlayHoles(Players);
         }
 
         public void PlayHoles(List<Player> Players)
         {
-            Console.Clear();
-            Console.WriteLine(ActiveCourse.Name);
-            Console.WriteLine("================================================");
-
-            // NOTE Keep active hole number displayed while each player enters number of strokes
-            // Go through each player. Once all players have entered score move to the next hole.
-            // Use Player.ScoreCount()?
-
-            int holeCount = 1;
-            // Take this out later
-            Console.WriteLine(ActiveCourse.Holes.Count);
-            // NOTE Not showing Par number
-            Console.WriteLine($"Hole: {holeCount} Par: {ActiveCourse.Holes}");
-            Console.WriteLine("------------------------------------------------");
-            for (var i = 0; i <= ActiveCourse.Holes.Count; i++)
-            {
-                Console.Write($"Strokes for {Players[i].Name}: ");
-                int numberOfStrokes = Convert.ToInt32(Console.ReadLine());
-                // Player[i].ScoreCount(numberOfStrokes);
-            }
 
             DisplayPlayerResults();
         }
 
         public void Run()
         {
-            while (InChoosingCourses)
+            DisplayCourses();
+
+            Console.Clear();
+            Console.WriteLine(ActiveCourse.Name);
+            Console.WriteLine("================================================");
+
+            int holeCount = 1;
+            // Take this out later
+            Console.WriteLine(ActiveCourse.Holes.Count);
+            // NOTE Not showing Par number
+            for (var i = 0; i < ActiveCourse.Holes.Count; i++)
             {
-                DisplayCourses();
+                Console.Clear();
+                Console.WriteLine($"Hole: {holeCount}");
+                Console.WriteLine("------------------------------------------------");
+
+                for (var p = 0; p < Players.Count; p++)
+                {
+                    Console.Write($"Strokes for {Players[p].Name}: ");
+                    int numberOfStrokes = Convert.ToInt32(Console.ReadLine());
+                    Players[p].Scores.Add(numberOfStrokes);
+                }
+
+                holeCount++;
             }
+
+            DisplayPlayerResults();
         }
 
         public void DisplayPlayerResults()
@@ -163,16 +165,20 @@ namespace Golf
             Console.WriteLine("Total Player Scores");
             Console.WriteLine("------------------------------------------------");
 
-            for (var i = 0; i < Players.Count; i++)
-            {
-                // NOTE Display player name and score total use Player.ScoreCount();
-                // Console.WriteLine(Player.);
-            }
+            foreach ()
+
+                for (var i = 0; i < Players.Count; i++)
+                {
+                    Console.WriteLine(Players[i].Name);
+
+                    // NOTE Display player name and score total use Player.ScoreCount();
+                    // Console.WriteLine(Player.);
+                }
         }
 
         public App()
         {
-            InChoosingCourses = true;
+            // InChoosingCourses = true;
             Players = new List<Player>();
             Courses = new List<Course>();
         }
