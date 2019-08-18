@@ -89,18 +89,35 @@ namespace Golf
 
         public void SetPlayers()
         {
-            Console.Write("Number of Players: ");
-            int numberOfPlayers = Convert.ToInt32(Console.ReadLine());
-            while (numberOfPlayers > 0)
+            Console.Write("Enter number of players: ");
+            int numberOfPlayers;
+            bool playersEntered = false;
+
+            while (!playersEntered)
             {
+                playersEntered = Int32.TryParse(Console.ReadLine(), out numberOfPlayers);
+                if (!playersEntered)
+                {
+                    Console.WriteLine("Invalid Entry!");
+                    Console.Write("Please enter a number for the number of players: ");
+                    continue;
+                }
 
-                numberOfPlayers--;
-                Console.Write("Player Name: ");
-                string playerName = Console.ReadLine();
+                if (playersEntered)
+                {
+                    while (numberOfPlayers > 0)
+                    {
+                        numberOfPlayers--;
+                        Console.Write("Player Name: ");
+                        string playerName = Console.ReadLine();
 
-                // NOTE Still need to figure out how to handle Player
-                Player player = new Player(playerName);
-                Players.Add(player);
+                        // NOTE Still need to figure out how to handle Player
+                        Player player = new Player(playerName);
+                        Players.Add(player);
+                    }
+
+                    playersEntered = true;
+                }
             }
 
             PlayHoles(Players);
