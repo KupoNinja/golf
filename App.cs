@@ -136,6 +136,32 @@ namespace Golf
                 Console.WriteLine($"Hole: {holeCount}");
                 Console.WriteLine("------------------------------------------------");
 
+                // NOTE Doesn't handle non ints well. Super gross type checking. Feel like I'm close to making it work...
+                // int numberOfStrokes = 0;
+                // bool strokesEntered = false;
+                // for (var p = 0; p < Players.Count; p++)
+                // {
+                //     Console.Write($"Strokes for {Players[p].Name}: ");
+                //     while (!strokesEntered)
+                //     {
+                //         strokesEntered = Int32.TryParse(Console.ReadLine(), out numberOfStrokes);
+                //         if (!strokesEntered)
+                //         {
+                //             Console.WriteLine("Invalid Entry!");
+                //             Console.WriteLine("Please enter a number for the number of strokes.");
+                //             Console.Write($"Strokes for {Players[p].Name}: ");
+                //             continue;
+                //         }
+                //         if (strokesEntered)
+                //         {
+                //             for (var pl = 0; pl < Players.Count; pl++)
+                //             {
+                //                 Players[pl].Scores.Add(numberOfStrokes);
+                //                 strokesEntered = true;
+                //             }
+                //         }
+                //     }
+                // }
                 // NOTE Need to handle if not an int
                 for (var p = 0; p < Players.Count; p++)
                 {
@@ -166,12 +192,11 @@ namespace Golf
 
         public void DisplayPlayerResults()
         {
-            // NOTE Display Course
             // NOTE Stretch: Display course holes par, display each player scores per hole
-            // NOTE Display player total score
             // NOTE Stretch: Display Course total par
             // NOTE Display winner (lowest score)
             // NOTE Option to Quit or play another game
+
             Console.Clear();
             Console.WriteLine(ActiveCourse.Name);
             Console.WriteLine("================================================");
@@ -187,16 +212,24 @@ namespace Golf
             DisplayWinner();
         }
 
+        // NOTE Still doesn't display the correct winner
         public void DisplayWinner()
         {
+            string winner = "";
+            int lowestTotalScore = int.MaxValue;
             Console.WriteLine("");
 
+            // NOTE Doesn't work since winner gets re-written every time.
+            //      Needs to compare to other player totalscores but unsure how to do that.
             for (var i = 0; i < Players.Count; i++)
             {
-                Players[i].DisplayFinalScore();
+                if (Players[i].TotalScore < lowestTotalScore)
+                {
+                    winner = Players[i].Name;
+                }
             }
 
-            Console.WriteLine("The Winner: ");
+            Console.WriteLine("The Winner: " + winner);
             Console.WriteLine("================================================");
         }
 
