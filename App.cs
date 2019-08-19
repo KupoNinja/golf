@@ -216,14 +216,19 @@ namespace Golf
         public void DisplayWinner()
         {
             string winner = "";
-            int lowestTotalScore = int.MaxValue;
+            int lowestTotalScore = Players[0].TotalScore;
             Console.WriteLine("");
 
             // NOTE Doesn't work since winner gets re-written every time.
             //      Needs to compare to other player totalscores but unsure how to do that.
             for (var i = 0; i < Players.Count; i++)
             {
-                if (Players[i].TotalScore < lowestTotalScore)
+                int currentScore = Players[i].TotalScore;
+                if (currentScore < lowestTotalScore)
+                {
+                    lowestTotalScore = currentScore;
+                }
+                if (lowestTotalScore == Players[i].TotalScore)
                 {
                     winner = Players[i].Name;
                 }
