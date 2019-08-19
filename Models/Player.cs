@@ -9,10 +9,12 @@ namespace Golf.ModelsActual
     {
         public string Name { get; set; }
         public List<int> Scores { get; set; }
+        public int TotalScore { get; set; }
 
-        public void DisplayFinalScore()
+        public int DisplayFinalScore()
         {
-            Scores.Sum();
+            TotalScore = Scores.Sum();
+            return TotalScore;
         }
 
         public Player(string name)

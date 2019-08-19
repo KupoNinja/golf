@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Golf.Interfaces;
 using Golf.ModelsActual;
 
@@ -118,14 +119,6 @@ namespace Golf
                     playersEntered = true;
                 }
             }
-
-            // PlayHoles(Players);
-        }
-
-        public void PlayHoles(List<Player> Players)
-        {
-
-            DisplayPlayerResults();
         }
 
         public void Run()
@@ -133,19 +126,17 @@ namespace Golf
             DisplayCourses();
 
             Console.Clear();
-            Console.WriteLine(ActiveCourse.Name);
-            Console.WriteLine("================================================");
-
             int holeCount = 1;
-            // Take this out later
-            Console.WriteLine(ActiveCourse.Holes.Count);
             // NOTE Not showing Par number
             for (var i = 0; i < ActiveCourse.Holes.Count; i++)
             {
                 Console.Clear();
+                Console.WriteLine(ActiveCourse.Name);
+                Console.WriteLine("================================================");
                 Console.WriteLine($"Hole: {holeCount}");
                 Console.WriteLine("------------------------------------------------");
 
+                // NOTE Need to handle if not an int
                 for (var p = 0; p < Players.Count; p++)
                 {
                     Console.Write($"Strokes for {Players[p].Name}: ");
@@ -157,23 +148,56 @@ namespace Golf
             }
 
             DisplayPlayerResults();
+
+            Console.WriteLine("");
+            Console.WriteLine("Press (Q) to quit or any other key to create a new game.");
+
+            string userInput = Console.ReadLine().ToUpper();
+            if (userInput == "Q")
+            {
+                return;
+            }
+            if (userInput != "Q")
+            {
+                Console.Clear();
+                Run();
+            }
         }
 
         public void DisplayPlayerResults()
         {
+            // NOTE Display Course
+            // NOTE Stretch: Display course holes par, display each player scores per hole
+            // NOTE Display player total score
+            // NOTE Stretch: Display Course total par
+            // NOTE Display winner (lowest score)
+            // NOTE Option to Quit or play another game
+            Console.Clear();
             Console.WriteLine(ActiveCourse.Name);
+            Console.WriteLine("================================================");
             Console.WriteLine("Total Player Scores");
             Console.WriteLine("------------------------------------------------");
 
-            foreach ()
+            foreach (var player in Players)
+            {
+                Console.Write(player.Name + ": ");
+                Console.WriteLine(player.DisplayFinalScore());
+            }
 
-                for (var i = 0; i < Players.Count; i++)
-                {
-                    Console.WriteLine(Players[i].Name);
+            DisplayWinner();
+        }
 
-                    // NOTE Display player name and score total use Player.ScoreCount();
-                    // Console.WriteLine(Player.);
-                }
+        public void DisplayWinner()
+        {
+            Console.WriteLine("");
+
+            for (var i = 0; i < Players.Count; i++)
+            {
+                Players[i].DisplayFinalScore();
+            }
+
+            Console.WriteLine("The Winner: ");
+            Console.WriteLine("================================================");
         }
 
         public App()
