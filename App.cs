@@ -11,7 +11,6 @@ namespace Golf
         public Course ActiveCourse { get; set; }
         public List<Player> Players { get; set; }
         public List<Course> Courses { get; set; }
-        // public bool InChoosingCourses { get; set; }
 
         public void Setup()
         {
@@ -28,16 +27,31 @@ namespace Golf
             course1.Holes.Add(hole3);
             course1.Holes.Add(hole4);
             course1.Holes.Add(hole6);
+            course1.Holes.Add(hole6);
+            course1.Holes.Add(hole3);
+            course1.Holes.Add(hole4);
+            course1.Holes.Add(hole5);
+            course1.Holes.Add(hole3);
 
             course2.Holes.Add(hole5);
             course2.Holes.Add(hole3);
             course2.Holes.Add(hole4);
             course2.Holes.Add(hole6);
+            course2.Holes.Add(hole5);
+            course2.Holes.Add(hole3);
+            course2.Holes.Add(hole3);
+            course2.Holes.Add(hole4);
+            course2.Holes.Add(hole5);
 
             course3.Holes.Add(hole5);
             course3.Holes.Add(hole3);
             course3.Holes.Add(hole4);
             course3.Holes.Add(hole6);
+            course3.Holes.Add(hole5);
+            course3.Holes.Add(hole3);
+            course3.Holes.Add(hole4);
+            course3.Holes.Add(hole4);
+            course3.Holes.Add(hole3);
 
             Courses.Add(course1);
             Courses.Add(course2);
@@ -136,35 +150,19 @@ namespace Golf
                 Console.WriteLine($"Hole: {holeCount}");
                 Console.WriteLine("------------------------------------------------");
 
-                // NOTE Doesn't handle non ints well. Super gross type checking. Feel like I'm close to making it work...
                 int numberOfStrokes = 0;
-                bool strokesEntered = false;
-                while (!strokesEntered)
+
+                for (var p = 0; p < Players.Count; p++)
                 {
-                    for (var p = 0; p < Players.Count; p++)
+                    Console.Write($"Strokes for {Players[p].Name}: ");
+                    while (!Int32.TryParse(Console.ReadLine(), out numberOfStrokes) && numberOfStrokes < 1)
                     {
-                        Console.Write($"Strokes for {Players[p].Name}: ");
-                        strokesEntered = Int32.TryParse(Console.ReadLine(), out numberOfStrokes);
-                        if (!strokesEntered)
-                        {
-                            Console.WriteLine("Invalid Entry!");
-                            Console.WriteLine("Please enter a number for the number of strokes.");
-                            break;
-                        }
-                        if (strokesEntered)
-                        {
-                            Players[p].Scores.Add(numberOfStrokes);
-                            strokesEntered = true;
-                        }
+                        Console.WriteLine("Invalid Entry!");
+                        Console.WriteLine("Please enter a number for the number of strokes.");
                     }
+
+                    Players[p].Scores.Add(numberOfStrokes);
                 }
-                // NOTE Need to handle if not an int
-                // for (var p = 0; p < Players.Count; p++)
-                // {
-                //     Console.Write($"Strokes for {Players[p].Name}: ");
-                //     int numberOfStrokes = Convert.ToInt32(Console.ReadLine());
-                //     Players[p].Scores.Add(numberOfStrokes);
-                // }
 
                 holeCount++;
             }
@@ -190,8 +188,6 @@ namespace Golf
         {
             // NOTE Stretch: Display course holes par, display each player scores per hole
             // NOTE Stretch: Display Course total par
-            // NOTE Display winner (lowest score)
-            // NOTE Option to Quit or play another game
 
             Console.Clear();
             Console.WriteLine(ActiveCourse.Name);
@@ -236,7 +232,6 @@ namespace Golf
 
         public App()
         {
-            // InChoosingCourses = true;
             Players = new List<Player>();
             Courses = new List<Course>();
         }
